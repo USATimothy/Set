@@ -39,12 +39,12 @@ properties=4 #shape, fill, number, color
 variants=3 #3 shapes, 3 fills, 3 numbers, 3 colors
 board_size=12 #12 cards at a time
 
-trials=1000#number of simulated 12-card setups
+trials=100#number of simulated 12-card setups
 
 #Create full deck (81 for Set game)
 deck = list(itertools.product(range(variants),repeat=properties))
 
-
+    
 #Several different functions and subfunctions for calculating the number of sets
 #on the board.
 
@@ -239,9 +239,10 @@ def plot_starting_sets(variants,trials,deck,board_size,method,subfunc=None):
             num_sets_list[t]=method(board,variants)
     maxsets=max(num_sets_list)
     ls=numpy.linspace(-0.5,maxsets+0.5,maxsets+2)
-    plt.hist(num_sets_list,bins=ls)
+    plt.hist(num_sets_list,bins=ls,color='#5DA5DA',ec='black')
     plt.ylabel('Frequency')
     plt.xlabel('Number of sets on the board')
+    plt.xticks(range(0,maxsets+1))
     plt.title('Frequency of games by number of sets available at game start' )
     plt.show()
     return
